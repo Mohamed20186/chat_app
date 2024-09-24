@@ -1,4 +1,4 @@
-import 'package:chat_app/constant.dart';
+import 'package:chat_app/core/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
