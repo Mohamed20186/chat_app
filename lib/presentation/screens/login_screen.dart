@@ -1,7 +1,7 @@
 import 'package:chat_app/core/constant.dart';
 import 'package:chat_app/core/helper/show_snack_bar.dart';
+import 'package:chat_app/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/presentation/manager/chat_cubit/chat_cubit.dart';
-import 'package:chat_app/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:chat_app/presentation/screens/chat_screen.dart';
 import 'package:chat_app/presentation/screens/register_screen.dart';
 import 'package:chat_app/presentation/widgets/custom_button.dart';
@@ -24,8 +24,8 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var loginProvider = BlocProvider.of<LoginCubit>(context);
-    return BlocConsumer<LoginCubit, LoginState>(
+    var loginProvider = BlocProvider.of<AuthCubit>(context);
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;

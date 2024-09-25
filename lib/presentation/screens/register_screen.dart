@@ -1,6 +1,6 @@
 import 'package:chat_app/core/constant.dart';
 import 'package:chat_app/core/helper/show_snack_bar.dart';
-import 'package:chat_app/presentation/manager/sginup_cubit/sginup_cubit.dart';
+import 'package:chat_app/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/presentation/screens/chat_screen.dart';
 import 'package:chat_app/presentation/widgets/custom_button.dart';
 import 'package:chat_app/presentation/widgets/custom_row.dart';
@@ -21,8 +21,8 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sginUp = BlocProvider.of<SginupCubit>(context);
-    return BlocConsumer<SginupCubit, SginupState>(
+    var sginUp = BlocProvider.of<AuthCubit>(context);
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SginupLoading) {
           isLoading = true;
