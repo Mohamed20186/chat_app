@@ -1,6 +1,6 @@
 import 'package:chat_app/core/constant.dart';
 import 'package:chat_app/core/helper/show_snack_bar.dart';
-import 'package:chat_app/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:chat_app/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/presentation/manager/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/presentation/screens/chat_screen.dart';
 import 'package:chat_app/presentation/screens/register_screen.dart';
@@ -24,8 +24,8 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var loginProvider = BlocProvider.of<AuthCubit>(context);
-    return BlocConsumer<AuthCubit, AuthState>(
+    var loginProvider = BlocProvider.of<AuthBloc>(context);
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -89,18 +89,18 @@ class LoginScreen extends StatelessWidget {
                   icon: const Icon(Icons.password),
                 ),
                 CustomButton(
-                  text: 'Sign In',
-                  onTap: () async {
-                    if (formKey.currentState!.validate()) {
-                      if (email != null && password != null) {
-                        loginProvider.loginUser(
-                            email: email!, password: password!);
+                    text: 'Sign In',
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                        if (email != null && password != null) {
+                          loginProvider.add(
+                              LoginEvent(email: email!, password: password!));
+                        } else {
+                          showSnackBar(
+                              context, 'Please fill in all the fields');
+                        }
                       }
-                    } else {
-                      showSnackBar(context, 'Please fill in all the fields');
-                    }
-                  },
-                ),
+                    }),
                 CustomRow(
                   callback: () {
                     Navigator.pushNamed(context, RegisterScreen.id);

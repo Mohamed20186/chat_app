@@ -1,4 +1,6 @@
 import 'package:chat_app/core/firebase_options.dart';
+import 'package:chat_app/core/simple_bloc_observer.dart';
+import 'package:chat_app/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/presentation/manager/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/presentation/screens/chat_screen.dart';
@@ -13,8 +15,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(const RmChat());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const RmChat());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class RmChat extends StatelessWidget {
@@ -30,6 +36,9 @@ class RmChat extends StatelessWidget {
         ),
         BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(),
         ),
       ],
       child: MaterialApp(

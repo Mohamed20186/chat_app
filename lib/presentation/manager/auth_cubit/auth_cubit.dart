@@ -45,4 +45,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(SginupFailure(errMessage: e.toString()));
     }
   }
+
+  @override
+  void onChange(Change<AuthState> change) {
+    super.onChange(change);
+    print(change);
+  }
 }
